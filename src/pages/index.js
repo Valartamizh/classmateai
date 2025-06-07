@@ -15,7 +15,7 @@ export default function Home() {
           }}
         >
           <h1 style={{ textAlign: "center", color: "white", textDecoration: "underline" }}>
-            ClassMate AI
+            ClassMate AI aaaaaaaaa
           </h1>
         </section>
 
