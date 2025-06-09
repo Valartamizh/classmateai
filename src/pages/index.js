@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import ReminderTimer from '../components/ReminderTimer';
-import AskAI from '../components/AskAI';
+import ReminderTimer from '../pages/ReminderTimer';
+import AskAI from '../pages/AskAI';
 
 import { useEffect } from 'react';
 export default function Home() {
