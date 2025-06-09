@@ -34,7 +34,8 @@ export default function ReminderTimer() {
       border: "1px solid #ccc",
       borderRadius: "10px",
       marginBottom: "1rem",
-      backgroundColor: "#f5f5f5",
+      color: "white",
+      backgroundColor: "black",
     }}>
       <h3>⏰ Class Reminder Timer</h3>
       <p>Time Left: {formatTime(secondsLeft)}</p>
