@@ -1,5 +1,8 @@
 import Head from 'next/head';
+import ReminderTimer from '../components/ReminderTimer';
+import AskAI from '../components/AskAI';
 
+import { useEffect } from 'react';
 export default function Home() {
   return (
     <>
@@ -18,7 +21,8 @@ export default function Home() {
             ClassMate AI
           </h1>
         </section>
-
+        <ReminderTimer />
+        <AskAI />
         <h1>Welcome to ClassMate AI</h1>
         <p>Your smart assistant to help you stay on track with classes, notes, and reminders.</p>
         <p>Explore our features and start using ClassMate AI today!</p>
@@ -60,11 +64,12 @@ export default function Home() {
           <ul>A weekly email or dashboard summary of the topics covered.</ul>
           <ul>Encourages spaced repetition and smart studying.</ul>
         </ul>
-
+        
         <nav style={{ marginTop: "30px" }}>
           <a href="/about" style={{ marginRight: "15px" }}>About</a>
           <a href="/contact">Contact</a>
         </nav>
+
       </main>
 
       <footer style={{ textAlign: "center", padding: "1rem", marginTop: "50px", borderTop: "1px solid #ddd" }}>
