@@ -1,14 +1,27 @@
 import { useState, useEffect } from 'react';
 
 export default function ReminderTimer() {
-  const [secondsLeft, setSecondsLeft] = useState(10); 
+  const [inputMinutes, setInputMinutes] = useState("");
+  const [secondsLeft, setSecondsLeft] = useState(null);
   const [reminder, setReminder] = useState("");
-  const [hasAlerted, setHasAlerted] = useState(false); 
+  const [hasAlerted, setHasAlerted] = useState(false);
+
+  const handleStart = () => {
+    const timeInSeconds = parseInt(inputMinutes) * 60;
+    if (!isNaN(timeInSeconds) && timeInSeconds > 0) {
+      setSecondsLeft(timeInSeconds);
+      setHasAlerted(false);
+      setReminder("");
+    } else {
+      alert("Please enter a valid number of minutes.");
+    }
+  };
 
   useEffect(() => {
-    if (secondsLeft <= 0) return;
+    if (secondsLeft === null || secondsLeft <= 0) return;
+
     const timer = setInterval(() => {
-      setSecondsLeft((prev) => (prev > 0 ? prev - 1 : 0));
+      setSecondsLeft((prev) => prev - 1);
     }, 1000);
 
     return () => clearInterval(timer);
@@ -37,8 +50,21 @@ export default function ReminderTimer() {
       color: "white",
       backgroundColor: "black",
     }}>
-      <h3>⏰ Class Reminder Timer</h3>
-      <p>Time Left: {formatTime(secondsLeft)}</p>
+      <h3>⏰ Set Your Class Reminder</h3>
+      
+      <input
+        type="number"
+        placeholder="Enter minutes"
+        value={inputMinutes}
+        onChange={(e) => setInputMinutes(e.target.value)}
+        style={{ padding: "0.5rem", marginRight: "10px" }}
+      />
+      <button onClick={handleStart}>Start Timer</button>
+
+      {secondsLeft !== null && secondsLeft > 0 && (
+        <p style={{ marginTop: "1rem" }}>Time Left: <strong>{formatTime(secondsLeft)}</strong></p>
+      )}
+
       <p style={{ fontWeight: "bold", color: "green" }}>{reminder}</p>
     </div>
   );
