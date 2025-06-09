@@ -14,7 +14,10 @@ export default function ReminderTimer() {
 
   useEffect(() => {
     if (secondsLeft === 0) {
-      <h1 style ={{ color: "red" , textAlign: "center", fontSize: "20px", fontWeight: "bold"}}>setReminder("It's time for your class!");</h1>
+      <div style={{ color: "red", fontWeight: "bold" }}>
+       { setReminder("Time's up! Class is starting now!")}
+      </div>;
+      setReminder("It's time for your class!");
     }
   }, [secondsLeft]);
 
