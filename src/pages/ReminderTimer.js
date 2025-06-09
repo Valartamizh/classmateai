@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export default function ReminderTimer() {
-  const [secondsLeft, setSecondsLeft] = useState(600); // 10 mins
+  const [secondsLeft, setSecondsLeft] = useState(60); // 10 mins
   const [reminder, setReminder] = useState("");
 
   useEffect(() => {

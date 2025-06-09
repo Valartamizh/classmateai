@@ -33,7 +33,7 @@ export default function AskAI() {
       <h4>Previous Questions:</h4>
       <ul>
         {history.map((q, idx) => (
-          <li key={idx}>{q}</li>
+          <ul key={idx}>{q}</ul>
         ))}
       </ul>
     </div>
