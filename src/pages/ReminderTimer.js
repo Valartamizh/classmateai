@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export default function ReminderTimer() {
-  const [secondsLeft, setSecondsLeft] = useState(60); // 10 mins
+  const [secondsLeft, setSecondsLeft] = useState(60); 
   const [reminder, setReminder] = useState("");
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export default function ReminderTimer() {
 
   useEffect(() => {
     if (secondsLeft === 0) {
-      setReminder("⏰ It's time for your class!");
+      <h1 style ={{ color: "red" , textAlign: "center", fontSize: "20px", fontWeight: "bold"}}>setReminder("It's time for your class!");</h1>
     }
   }, [secondsLeft]);
 
