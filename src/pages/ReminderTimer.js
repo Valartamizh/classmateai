@@ -1,25 +1,26 @@
 import { useState, useEffect } from 'react';
 
 export default function ReminderTimer() {
-  const [secondsLeft, setSecondsLeft] = useState(60); 
+  const [secondsLeft, setSecondsLeft] = useState(10); 
   const [reminder, setReminder] = useState("");
+  const [hasAlerted, setHasAlerted] = useState(false); 
 
   useEffect(() => {
+    if (secondsLeft <= 0) return;
     const timer = setInterval(() => {
-      setSecondsLeft((prev) => prev - 1);
+      setSecondsLeft((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [secondsLeft]);
 
   useEffect(() => {
-    if (secondsLeft === 0) {
-      <div style={{ color: "red", fontWeight: "bold" }}>
-       { setReminder("Time's up! Class is starting now!")}
-      </div>;
-      setReminder("It's time for your class!");
+    if (secondsLeft === 0 && !hasAlerted) {
+      setReminder("⏰ It's time for your class!");
+      alert("⏰ Class Reminder: It's time for your class!");
+      setHasAlerted(true);
     }
-  }, [secondsLeft]);
+  }, [secondsLeft, hasAlerted]);
 
   const formatTime = (sec) => {
     const mins = Math.floor(sec / 60);
@@ -28,10 +29,16 @@ export default function ReminderTimer() {
   };
 
   return (
-    <div style={{ padding: "1rem", border: "1px solid #ccc", borderRadius: "10px", marginBottom: "1rem" }}>
-      <h3>Class Reminder Timer</h3>
+    <div style={{
+      padding: "1rem",
+      border: "1px solid #ccc",
+      borderRadius: "10px",
+      marginBottom: "1rem",
+      backgroundColor: "#f5f5f5",
+    }}>
+      <h3>⏰ Class Reminder Timer</h3>
       <p>Time Left: {formatTime(secondsLeft)}</p>
-      <p>{reminder}</p>
+      <p style={{ fontWeight: "bold", color: "green" }}>{reminder}</p>
     </div>
   );
 }
