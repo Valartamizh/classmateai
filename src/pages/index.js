@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import ReminderTimer from '../pages/ReminderTimer';
-import AskAI from '../pages/AskAI';
+import ReminderTimer from '../components/ReminderTimer';
+import AskAI from '../components/AskAI';
 import { useState } from 'react';
 export default function Home() {
   const [input, setInput] = useState("");
