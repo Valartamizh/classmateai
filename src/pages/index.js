@@ -1,9 +1,20 @@
 import Head from 'next/head';
 import ReminderTimer from '../pages/ReminderTimer';
 import AskAI from '../pages/AskAI';
-
-import { useEffect } from 'react';
+import { useState } from 'react';
 export default function Home() {
+  const [input, setInput] = useState("");
+  const [response, setResponse] = useState("");
+
+  const handleAsk = async () => {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: input }),
+    });
+    const data = await res.json();
+    setResponse(data.answer);
+  };
   return (
     <>
       <Head>
@@ -64,6 +75,20 @@ export default function Home() {
           <ul>A weekly email or dashboard summary of the topics covered.</ul>
           <ul>Encourages spaced repetition and smart studying.</ul>
         </ul>
+        <h1>Ask ClassMate AI 🤖</h1>
+      <input
+        type="text"
+        placeholder="Type your question..."
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        style={{ padding: "10px", width: "60%" }}
+      />
+      <button onClick={handleAsk} style={{ marginLeft: "10px", padding: "10px 20px" }}>Ask</button>
+
+      <div style={{ marginTop: "20px", padding: "10px", border: "1px solid #ccc" }}>
+        <strong>Answer:</strong>
+        <p>{response}</p>
+      </div>
         
         <nav style={{ marginTop: "30px" }}>
           <a href="/about" style={{ marginRight: "15px" }}>About</a>

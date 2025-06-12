@@ -4,7 +4,6 @@ export default function AskAI() {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [history, setHistory] = useState([]);
-
   const handleAsk = () => {
     if (question.trim()) {
       setAnswer("AI says: This is a summary of your topic.");

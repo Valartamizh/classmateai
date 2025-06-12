@@ -29,7 +29,7 @@ export default function ReminderTimer() {
 
   useEffect(() => {
     if (secondsLeft === 0 && !hasAlerted) {
-      setReminder("/n" + "⏰ It's time for your class!");
+      setReminder("⏰ It's time for your class!");
       alert("⏰ Class Reminder: It's time for your class!");
       setHasAlerted(true);
     }
