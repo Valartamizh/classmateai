@@ -1,39 +1,30 @@
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method not allowed" });
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Only POST allowed' });
   }
 
   const { prompt } = req.body;
 
   try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
+    const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
       headers: {
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
-        "Content-Type": "application/json"
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user", content: prompt }],
+        model: 'gpt-3.5-turbo',
+        messages: [{ role: 'user', content: prompt }],
         temperature: 0.7
       })
     });
 
-    const data = await response.json();
+    const data = await openaiRes.json();
+    const answer = data.choices?.[0]?.message?.content ?? 'No AI response';
 
-    // Debug log
-    console.log("API response:", JSON.stringify(data, null, 2));
-
-    const answer = data?.choices?.[0]?.message?.content;
-
-    if (!answer) {
-      return res.status(500).json({ answer: "No response from AI (empty message)" });
-    }
-
-    res.status(200).json({ answer });
-
+    return res.status(200).json({ answer });
   } catch (error) {
-    console.error("OpenAI API error:", error);
-    res.status(500).json({ answer: "Error communicating with AI" });
+    console.error(error);
+    return res.status(500).json({ answer: 'Error contacting AI' });
   }
 }
