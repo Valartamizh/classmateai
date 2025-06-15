@@ -2,6 +2,12 @@ import Head from 'next/head';
 import ReminderTimer from '../components/ReminderTimer';
 import AskAI from '../components/AskAI';
 import { useState } from 'react';
+import { Analytics } from "@vercel/analytics/next";
+<Analytics />
+import FileUpload from '../components/FileUpload';
+<FileUpload />
+
+
 export default function Home() {
   const [input, setInput] = useState("");
   const [response, setResponse] = useState("");
@@ -101,5 +107,6 @@ export default function Home() {
         <p>Thank You for using ClassMate AI | &copy; {new Date().getFullYear()}</p>
       </footer>
     </>
+    
   );
 }
